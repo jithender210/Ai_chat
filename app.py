@@ -4,6 +4,9 @@ import random
 from streamlit_geolocation import streamlit_geolocation
 import requests
 from core.speaker import speak
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 st.set_page_config(
     page_title="Jarvis Assistant",
@@ -38,7 +41,7 @@ latitude = location['latitude'] if location else None
 def get_weather(lat, lon):
     if lat is None or lon is None:
         return None
-    api_key="c6c326ff2ff9b8f252c350b674ee305d"
+    api_key=os.getenv("WEATHER") 
     url = f"http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units=metric"
     data = requests.get(url)
     
