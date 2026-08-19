@@ -7,12 +7,19 @@ from core.speaker import speak
 import os
 from dotenv import load_dotenv
 load_dotenv()
+from zoneinfo import ZoneInfo
+
+user_timezone = st.context.timezone
 
 st.set_page_config(
     page_title="Jarvis Assistant",
     page_icon="🤖",
     layout="wide"
 )
+if user_timezone:
+    now = datetime.now(ZoneInfo(user_timezone))
+else:
+    now = datetime.now(ZoneInfo("Asia/Kolkata"))
 
 # ---------- Custom UI ----------
 st.markdown("""
@@ -86,7 +93,7 @@ if prompt:
         reply = "Hello sir ! Nice to meet you."
         speak("Hello sir ! Nice to meet you.")
     elif "time" in text:
-        reply = f"Current time: **{datetime.now().strftime('%I:%M %p')}**"
+        reply = f"Current time: **{now.strftime("%I:%M %p")}**"
         speak(f"Current time: {datetime.now().strftime('%I %M %p')}")
     elif "date" in text:
         reply = f"Today's date is **{datetime.now().strftime('%d %B %Y')}**"
