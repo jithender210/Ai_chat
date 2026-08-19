@@ -87,10 +87,10 @@ if prompt:
         speak("Hello sir ! Nice to meet you.")
     elif "time" in text:
         reply = f"Current time: **{datetime.now().strftime('%I:%M %p')}**"
-        speak(f"Current time: **{datetime.now().strftime('%I %M %p')}")
+        speak(f"Current time: {datetime.now().strftime('%I %M %p')}")
     elif "date" in text:
         reply = f"Today's date is **{datetime.now().strftime('%d %B %Y')}**"
-        speak(f"Today's date is **{datetime.now().strftime('%d %B %Y')}**")
+        speak(f"Today's date is {datetime.now().strftime('%d %B %Y')}")
     elif "weather" in text:
         weather= get_weather(latitude,longitude)
         if weather:
