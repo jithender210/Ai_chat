@@ -9,17 +9,16 @@ from dotenv import load_dotenv
 load_dotenv()
 from zoneinfo import ZoneInfo
 
-user_timezone = st.context.timezone
+india_tz = ZoneInfo("Asia/Kolkata")
+now = datetime.now(india_tz)
+
+current_time = now.strftime("%I:%M %p")
 
 st.set_page_config(
     page_title="Jarvis Assistant",
     page_icon="🤖",
     layout="wide"
 )
-if user_timezone:
-    now = datetime.now(ZoneInfo(user_timezone))
-else:
-    now = datetime.now(ZoneInfo("Asia/Kolkata"))
 
 # ---------- Custom UI ----------
 st.markdown("""
@@ -93,8 +92,8 @@ if prompt:
         reply = "Hello sir ! Nice to meet you."
         speak("Hello sir ! Nice to meet you.")
     elif "time" in text:
-        reply = f"Current time: **{now.strftime("%I:%M %p")}**"
-        speak(f"Current time: {datetime.now().strftime('%I %M %p')}")
+        reply = f"Current time: **{current_time}**"
+        speak(reply)
     elif "date" in text:
         reply = f"Today's date is **{datetime.now().strftime('%d %B %Y')}**"
         speak(f"Today's date is {datetime.now().strftime('%d %B %Y')}")
